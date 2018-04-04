@@ -4,13 +4,14 @@
 class Board{
 
 private:
-    const int HEIGHT = 20;
-    const int WIDTH = 10;
-    const int MAX_CLEAR = 3;
+    static const int HEIGHT = 20;
+    static const int WIDTH = 10;
+    static const int MAX_CLEAR = 3;
     int board[HEIGHT][WIDTH];
 
     void clearLine(int row);
-
+    void collapseLines();
+    void copyRow(int from, int to);
 public:
     Board();
     int checkClearLines();

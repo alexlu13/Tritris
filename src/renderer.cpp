@@ -1,4 +1,4 @@
-#include <GL/glut.h>
+/*#include <GL/glut.h>
 
 // TODO: variable window size? fullscreen?
 const int WINDOW_WIDTH = 800;
@@ -34,3 +34,4 @@ void initialize(int argc, char *argv[]) {
 	glutMainLoop();
 
 }
+*/
