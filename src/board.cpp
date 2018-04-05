@@ -1,4 +1,5 @@
 #include "board.h"
+#include <iostream>
 
 // Board default constructor
 Board::Board() {
@@ -7,6 +8,14 @@ Board::Board() {
     for (int i = 0; i < Board::HEIGHT; i++) {
         for (int j = 0; j < Board::WIDTH; j++) {
             this->board[i][j] = 0;
+        }
+    }
+}
+
+Board::Board(const int b[Board::HEIGHT][Board::WIDTH]) {
+    for (int i = 0; i < Board::HEIGHT; i++) {
+        for (int j = 0; j < Board::WIDTH; j++) {
+            this->board[i][j] = b[i][j];
         }
     }
 }
@@ -25,15 +34,17 @@ void Board::copyRow(int from, int to) {
 }
 
 // collapse all of the lines after clearing a line
-void Board::collapseLines(const int[] cleared) {
+void Board::collapseLines(const int cleared[]) {
     int base;
     int top;
     for (int i = 0; i < Board::MAX_CLEAR && cleared[i] != -1; i++) {
         base = cleared[i];
         top = (i == Board::MAX_CLEAR - 1
-                || cleared[i + 1] = -1) ? Board::HEIGHT : cleared[i + 1];
-        for (int j = 1; j < top; i++) {
+                || cleared[i + 1] == -1) ? Board::HEIGHT : cleared[i + 1];
+        std::cout << "top: " << top << std::endl;
+        for (int j = base + 1; j < top; j++) {
             copyRow(j, j-1);
+            clearLine(j);
         }
     }
 }
@@ -46,12 +57,12 @@ int Board::checkClearLines() {
     int clearedLines[Board::MAX_CLEAR] = {-1, -1, -1};
     int numCleared = 0;
     int base = -1;
-    bool toClear = true;
+    bool toClear;
     // check each row
     for (int i = 0; i < Board::HEIGHT; i++) {
-
+        toClear = true;
         // can only clear 3 blocks, so don't check above
-        if (base != -1 && i > base + Board::MAX_CLEAR) {
+        if (base != -1 && i > base + Board::MAX_CLEAR - 1) {
             break;
         }
         // check along the columns
@@ -69,11 +80,25 @@ int Board::checkClearLines() {
                 base = i;
             }
         }
+
     }
 
     for (int i = 0; i < numCleared; i++) {
         this->clearLine(clearedLines[i]);
     }
 
+    collapseLines(clearedLines);
     return 0;
+}
+
+// overloaded output operator
+std::ostream& operator<<(std::ostream &os, const Board &board) {
+
+    for (int i = Board::HEIGHT - 1; i >= 0; i--) {
+        for (int j = 0; j < Board::WIDTH; j++) {
+            os << board.board[i][j] << ' ';
+        }
+        os << '\n';
+    }
+    return os;
 }

@@ -43,10 +43,11 @@
 			<Add library="gdi32" />
 			<Add directory="E:/Programs/CodeBlocks/MinGW/lib" />
 		</Linker>
-		<Unit filename="include/gamehandler.c">
-			<Option compilerVar="CC" />
-		</Unit>
+		<Unit filename="include/board.h" />
+		<Unit filename="include/gamehandler.h" />
 		<Unit filename="include/renderer.h" />
+		<Unit filename="src/board.cpp" />
+		<Unit filename="src/gamehandler.cpp" />
 		<Unit filename="src/main.cpp" />
 		<Unit filename="src/renderer.cpp" />
 		<Extensions>
