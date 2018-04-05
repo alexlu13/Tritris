@@ -6,7 +6,7 @@
 #include <string>
 
 const bool TEST = true;
-const int TEST_CASE = 5;
+const int TEST_CASE = 6;
 
 void testMain(int argc, char **argv) {
     // read in test board

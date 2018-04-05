@@ -80,7 +80,6 @@ int Board::checkClearLines() {
                 base = i;
             }
         }
-
     }
 
     for (int i = 0; i < numCleared; i++) {
